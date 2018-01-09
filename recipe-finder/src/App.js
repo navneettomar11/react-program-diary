@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import './App.css';
 import Home from './views/home/Home';
+import About from './views/about/About';
 import { Header } from './commons/index';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <div className="page-content container">
           <Switch>
           <Route exact path='/' component={Home}/>
+          <Route exact path='/about' component={About}/>
           </Switch>
           </div>
         </main>

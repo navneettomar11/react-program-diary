@@ -8,7 +8,7 @@ export default class Parser{
 			responseJson.hits.forEach((hit) => {
 				let receipeHit = new ReceipeHit(hit);
 				receipeHit.recipe = new Receipe(hit.recipe);
-				//receipeHit.recipe.yield = hit.recipe.yield;
+				receipeHit.recipe.yield = hit.recipe.yield;
 				edamamObj.hits.push(receipeHit);
 			});
 		}

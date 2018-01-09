@@ -1,3 +1,51 @@
-.serchButton, .serchButton:focus, .serchButton:hover,  .serchButton:active,  .serchButton:visited  {
-	border: none;
+body{
+	
 }
+
+.container{
+	max-width: 1400px;
+    padding-left: 6%;
+    padding-right: 6%;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* About me */
+.about-content{
+	margin: 0 auto;
+	text-align: center;
+}
+
+.about-content > figure {
+	display: inline-block;
+    padding: 38px;
+    border-radius: 100%;
+    background: #63befd;
+    position: relative;
+    overflow: visible;
+}
+
+.about-content > figure > img{
+	width: 130px;
+	height: 130px;
+}
+.about-content > figure > figcaption{
+	position: absolute;
+    bottom: -40px;
+    width: 100%;
+    left: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.about-content h2 {
+    font-size: 48px;
+    line-height: 60px;
+    margin-bottom: 30px;
+}
+.about-content p {
+    display: block;
+    font-size: 18px;
+    line-height: 28px;
+}
+/* About us */
