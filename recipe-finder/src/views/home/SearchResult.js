@@ -1,47 +1,20 @@
 import React from 'react';
 
 const SearchResult = (props) => {
-	let tmpData = [], searchResultRowList = [];
-	console.log(props.data);
-	props.data.forEach((rowData, i)=> {
-		console.log(rowData, i);
-		if(i > 0 && i % 3 === 0){
-			searchResultRowList.push(<SearchResultRow key={i} rowData={tmpData}/>);
-			tmpData = [];
-		}
-		tmpData.push(rowData);
-	});
-	if(tmpData.length > 0){
-		searchResultRowList.push(<SearchResultRow key={props.data.length} rowData={tmpData}/>);
-	}
+	let searchResultRowList = [];
+	props.data.forEach((receipeHit, i)=> searchResultRowList.push(<SearchResultData key={i} recipe={receipeHit.recipe}/>));
 	return (
-		<div className="mdl-grid">
 		<div className="mdl-cell mdl-cell--12-col">
 			{searchResultRowList}
-		</div>
 		</div>
 	);
 }
 
-const SearchResultRow = (props) => {
-	const searchRecipeCells = props.rowData.map((receipeHit, i) => {
-		return (
-			<div className="mdl-cell mdl-cell--4-col" key={i}>
-				<SearchResultData recipe ={receipeHit.recipe} />
-			</div>
-		);
-	});
-	return (
-		<div className="mdl-grid">
-			{searchRecipeCells}
-		</div>
-	);
-}
 
 const SearchResultData = (props) => {
 	const recipe = props.recipe;
 	return (
-		<div key={recipe.label} className="receipe-finder-card-square mdl-card mdl-shadow--2dp">
+		<div key={recipe.label} className="receipe-finder-card-square mdl-card mdl-shadow--2dp mdl-cell--4-col">
 			<div className="mdl-card__title mdl-card--expand">
 				<h2 className="mdl-card__title-text">{recipe.label}</h2>
 			</div>

@@ -1,7 +1,19 @@
 .receipe-finder-card-square.mdl-card {
-	width: 300px;
+	width: 32%;
+	display: inline-block;
+	margin-right: 10px;
 }
 .receipe-finder-card-square > .mdl-card__title > .mdl-card__title-text {
 	margin-right: 16px;
 }		
+.receipe-finder-card-square.mdl-card > .mdl-card__media {
+	background: transparent;
+	text-align: center;
+}
 
+.marginRight {
+	margin-right: 10px;
+}
+.nv-search-button {
+	margin-top: 15px;
+}
