@@ -13,6 +13,15 @@ export default class HttpClient {
 		});
 		return queryParam;
 	}
+
+	ajaxLoader(hide){
+		let ajaxLoader = document.getElementsByClassName("	ajax-loader")[0];
+		if(hide){
+			ajaxLoader.classList.add('hide')
+		}else{
+			ajaxLoader.classList.remove('hide');
+		}
+	}
 	/**
 	 * @param url
 	 * @param headers

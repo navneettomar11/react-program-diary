@@ -1,8 +1,3 @@
-.receipe-finder-card-square.mdl-card {
-	width: 32%;
-	display: inline-block;
-	margin-right: 10px;
-}
 .receipe-finder-card-square > .mdl-card__title > .mdl-card__title-text {
 	margin-right: 16px;
 }		
@@ -15,5 +10,25 @@
 	margin-right: 10px;
 }
 .nv-search-button {
-	margin-top: 15px;
+	padding: 0;
+	min-width: 42px;	
+}
+
+.recipe-search-result{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+.recipe-search-result > li {
+	padding: 5px;
+	width: 320px;
+	height: auto;
+	margin-top: 10px;
 }

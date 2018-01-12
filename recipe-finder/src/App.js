@@ -27,6 +27,7 @@ class App extends Component {
            
           </div>
         </footer>
+        <div className="ajax-loader hide"></div>
       </div>
     );
   }
