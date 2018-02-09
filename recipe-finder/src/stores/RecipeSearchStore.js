@@ -10,10 +10,15 @@ class RecipeSearchStore extends EventEmitter {
 		this.more = false;
 		this.fromIdx = 0;
 		this.toIdx = PER_PAGE_LIMIT;
+		this.queryText = '';
 		//Registers action handler with the Dispatcher.
 		Dispatcher.register(this._registerToActions.bind(this));
 	}
 
+	/**
+	 * Callbac function which is invoked by dispatcher
+	 * @param {*} action 
+	 */
 	_registerToActions(action) {
 		switch(action.actionType) {
 			case ACTIONTYPES.SEARCH_RECIPE:
@@ -27,29 +32,55 @@ class RecipeSearchStore extends EventEmitter {
 	}
 
 	/**
+	 *  Return Receipe Search objects
+	 */
+	getRecipeSearchObject(){
+		return { 
+			queryText: this.queryText, 
+			from: this.fromIdx,  
+			to: this.toIdx, 
+			more : this.more
+		}
+	}
+
+	/**
 	 * Return Recipe List
 	 */
 	getRecipeList(){
 		return this.recipeList;
 	}
 
+	/**
+	 * Return boolean - more receipe flag
+	 */
 	isMore(){
 		return this.more;
 	}
 
+	/**
+	 * get from index
+	 */
 	getFromIdx(){
 		return this.fromIdx;
 	}
 
+	/**
+	 * get to index 
+	 */
 	getToIdx(){
 		return this.toIdx;
 	}
 
+	/**
+	 * Calling third party rest api to find recipe list for given search items
+	 * @param {*} data 
+	 */
 	_callRecipeSearchApi(data){
 		this.recipeList = this.recipeList.concat(data.recipeList);
 		this.more = data.moreData;
 		this.fromIdx = data.from;
 		this.toIdx = data.to;
+		this.queryText = data.queryText;
 		this.emit(CHANGE_EVENT);
 	}
 

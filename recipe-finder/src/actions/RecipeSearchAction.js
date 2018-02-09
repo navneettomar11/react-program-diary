@@ -8,6 +8,8 @@ class RecipeSearchAction {
 	constructor(){
 		this.httpClient = new HttpClient();
 	}
+
+	
 	callRecipeSearchApi(searchObj){
 		let searchData = {'q':searchObj.queryText, app_id : EDAMAM_API_ID, app_key : EDAMAM_API_KEY, from: searchObj.from, to: searchObj.to};
 		this._callEdamanRecipeSearchApi(searchData, ACTIONTYPES.SEARCH_RECIPE);
@@ -27,7 +29,7 @@ class RecipeSearchAction {
 			let edamanObj = Parser.parseResponseToEdamamResponse(response);
 			Dispatcher.dispatch({
 				actionType: dispatchActionType,
-				payload: {recipeList: edamanObj.hits || [] , moreData: edamanObj.more, from : edamanObj.from, to : edamanObj.to}, 
+				payload: {recipeList: edamanObj.hits || [] , moreData: edamanObj.more, from : edamanObj.from, to : edamanObj.to, queryText: edamanObj.q}, 
 			});
 		}).catch(function(ex) {
 			console.log(ex);
