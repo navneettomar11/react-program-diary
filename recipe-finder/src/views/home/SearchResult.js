@@ -1,15 +1,36 @@
 import React from 'react';
+import RecipeSearchStore from '../../stores/RecipeSearchStore';
 
-const SearchResult = (props) => {
-	let searchResultRowList = [];
-	props.data.forEach((receipeHit, i)=> searchResultRowList.push(<SearchResultData key={i} recipe={receipeHit.recipe}/>));
-	return (
-		<ul className="mdl-cell--12-col recipe-search-result">
-			{searchResultRowList}
-		</ul>
-	);
+class SearchResult extends React.Component {
+	constructor(props){
+		super(props);
+		this.state ={ recipeList :  RecipeSearchStore.getRecipeList()};
+		this._onChange = this._onChange.bind(this);
+	}
+
+	_onChange(){
+		this.setState({ recipeList :  RecipeSearchStore.getRecipeList()});
+	}
+
+	componentWillMount(){
+		RecipeSearchStore.addChangeListener(this._onChange);
+	}
+
+	componentWillUnmount(){
+		RecipeSearchStore.removeChangeListener(this._onChange);
+	}
+
+	render(){
+		let searchResultRowList = [];
+		this.state.recipeList.forEach((receipeHit, i)=> searchResultRowList.push(<SearchResultData key={i} recipe={receipeHit.recipe}/>));
+		return (
+			<ul className="mdl-cell--12-col recipe-search-result">
+				{searchResultRowList}
+			</ul>
+		);
+	}
+
 }
-
 
 const SearchResultData = (props) => {
 	const recipe = props.recipe;

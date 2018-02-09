@@ -3,66 +3,56 @@ import 'getmdl-select/getmdl-select.min.css';
 import 'getmdl-select/getmdl-select.min.js';
 import './Home.css';
 import SearchResult from './SearchResult';
-import HttpClient from '../../utils/HttpClient';
-import Parser from '../../utils/Parser';
-import {RECEIPE_SEARCH_API_URL,EDAMAM_API_ID, EDAMAM_API_KEY} from '../../config/Constants';
+import RecipeSearchAction from '../../actions/RecipeSearchAction';
+import RecipeSearchStore from '../../stores/RecipeSearchStore';
 
 export default class Home extends React.Component {
 
-	
 	constructor(props){
 		super(props);
-		this.state = {
-			queryText: '',
-			from: 0, 
-			to: 9,
-			more: false, 
-			receipeList : []
-		};
+		this.state = this.getSearchStateObject();
 		this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
-		this.searchReceipe = this.searchReceipe.bind(this);
+		this.callSearchRecipeApi = this.callSearchRecipeApi.bind(this);
 		this.loadMoreRecipes = this.loadMoreRecipes.bind(this);
+		this._onChange = this._onChange.bind(this);
+	}
+
+	getSearchStateObject(){
+		return { 
+			queryText: '', 
+			from: RecipeSearchStore.getFromIdx(),  
+			to: RecipeSearchStore.getToIdx(), 
+			more : RecipeSearchStore.isMore()}
 	}
 
 	handleSearchTextChange(event){
-		this.setState({
-			queryText: event.target.value,
-		});
+		this.setState({queryText: event.target.value});
 	}
 
-	searchReceipe(){
-		let httpClient = new HttpClient();
-		if(this.state.queryText === ''){
-			return;
-		}
-		let searchData = {'q':this.state.queryText, app_id : EDAMAM_API_ID, app_key : EDAMAM_API_KEY, from: this.state.from, to: this.state.to};
-		//httpClient.get("data/demo2.json", searchData)
-		httpClient.ajaxLoader();
-		httpClient.get(RECEIPE_SEARCH_API_URL, searchData)
-		.then((response) => {
-			let edamanObj = Parser.parseResponseToEdamamResponse(response);
-			this.setState((prevState, props) => ({
-				more: edamanObj.more,
-				receipeList : prevState.receipeList.concat(edamanObj.hits || [])
-			}),()=>{
-				console.log(this.state);
-			});
-			httpClient.ajaxLoader(true);
-		}).catch(function(ex) {
-			console.log(ex);
-			httpClient.ajaxLoader(true);
-		});
+	callSearchRecipeApi(){
+		RecipeSearchAction.callRecipeSearchApi(this.state);
 		return false;
 	}
 
 	loadMoreRecipes(event){
-		let fromIdx = this.state.to;
-		let toIdx = fromIdx + 9;
-		this.setState({
-			from: fromIdx,
-			to: toIdx
-		},this.searchReceipe);
+		RecipeSearchAction.loadMoreReceipes(this.state);
 		return false;
+	}
+
+	_onChange(){
+		this.setState({
+			more : RecipeSearchStore.isMore(),
+			from: RecipeSearchStore.getFromIdx(),  
+			to: RecipeSearchStore.getToIdx()
+		});
+	}
+
+	componentWillMount(){
+		RecipeSearchStore.addChangeListener(this._onChange);
+	}
+
+	componentWillUnmount(){
+		RecipeSearchStore.removeChangeListener(this._onChange);
 	}
 
 	render(){
@@ -75,12 +65,12 @@ export default class Home extends React.Component {
 					</div>
 					
 					<div className="mdl-cell--1-col mdl-cell--middle">	
-						<button className="mdl-button mdl-js-button mdl-button--colored  nv-search-button" onClick={this.searchReceipe}>
+						<button className="mdl-button mdl-js-button mdl-button--colored  nv-search-button" onClick={this.callSearchRecipeApi}>
 							<i className="material-icons">search</i>
 						</button>
 					</div>
 				</form>	
-				<SearchResult data={this.state.receipeList}/>
+				<SearchResult />
 				{ this.state.more &&
 					(<div className="mdl-grid">
 						<div className="mdl-cell mdl-cell--12-col text-center">
