@@ -33,6 +33,11 @@ a:hover {
     outline: 0;
 }
 
+img{
+    vertical-align: middle;
+    border-style: none;
+}
+
 
 #root{
     width: 100%;
@@ -55,6 +60,11 @@ a:hover {
     clear: both;
 }
 
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
 /*Button*/
 .btn{
     display: inline-block;
@@ -94,7 +104,7 @@ a:hover {
     margin-left: 5px;
 }
 
-/**/
+/*Error*/
 .error{
     padding: 15px;
     margin-bottom: 20px;
@@ -135,6 +145,10 @@ a:hover {
 
 .nv-col-9{
     width: 75%
+}
+
+.nv-col-12{
+    width: 100%;
 }
 /*End Grid System */
 
@@ -225,12 +239,50 @@ a:hover {
 } 
 
 /**/
-.container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 15px;
+
+
+/*Card*/
+.nv-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    position: relative;
+    width: 31%;
+}
+.nv-card:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.nv-card img{
+    display: block;
+    height: 300px;
+    width: 100%;
+}
+.nv-card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 10px 0;
 }
 
+/* Search Result Grid*/
+.search-result-grid{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-flex-flow: row wrap;
+ }
+.search-result-grid-item {
+    padding: 5px;
+    margin: 10px 10px 0;
+    font-weight: bold;
+    text-align: center;
+  }
 /* About me */
 .about-content{
 	margin: 0 auto;

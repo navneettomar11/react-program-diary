@@ -26,15 +26,10 @@ class SearchResultGrid extends React.Component {
 	render(){
 		let searchResultRowList = [];
 		this.state.recipeList.forEach((receipeHit, i)=> searchResultRowList.push(<SearchResultData key={i} recipe={receipeHit.recipe}/>));
-		if(searchResultRowList.length === 0){
-			return(
-				<p>No Recipe Founds</p>
-			);
-		}
 		return (
-			<ul className="mdl-cell--12-col recipe-search-result">
+			<div className="search-result-grid">
 				{searchResultRowList}
-			</ul>
+			</div>
 		);
 	}
 
@@ -43,23 +38,12 @@ class SearchResultGrid extends React.Component {
 const SearchResultData = (props) => {
 	const recipe = props.recipe;
 	return (
-		<li>
-		<div key={recipe.label} className="receipe-finder-card-square mdl-card mdl-shadow--2dp">
-			<div className="mdl-card__title mdl-card--expand">
-				<h2 className="mdl-card__title-text">{recipe.label}</h2>
-			</div>
-			<div className="mdl-card__media">
-				<Image src={recipe.image} alt={recipe.label} />
-			</div>
-			<div className="mdl-card__actions">
-			</div>
-			<div className="mdl-card__menu">
-				<button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-				<i className="material-icons">share</i>
-				</button>
+		<div key={recipe.label} className="nv-card search-result-grid-item">
+			<Image src={recipe.image} alt={recipe.label} />
+			<div className="nv-card-block">
+				<p>{recipe.label}</p>
 			</div>
 		</div>
-		</li>
 	);
 }
 
@@ -94,10 +78,8 @@ class SearchResult extends React.Component{
 			<div>
 				<SearchResultGrid />
 				{ this.state.searchData.more &&
-					(<div className="mdl-grid">
-						<div className="mdl-cell mdl-cell--12-col text-center">
-							<button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={this.loadMoreRecipes}>Load More</button>
-						</div>
+					(<div className="nv-grid">
+							<button className="btn btn-default" onClick={this.loadMoreRecipes}>Load More</button>
 					</div>)
 				}
 			</div>

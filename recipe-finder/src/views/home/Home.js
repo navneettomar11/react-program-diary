@@ -1,8 +1,8 @@
 import React from 'react';
 import RecipeSearchAction from '../../actions/RecipeSearchAction';
 import RecipeSearchStore from '../../stores/RecipeSearchStore';
-import { Redirect } from 'react-router-dom';
 import {DIETS, HEALTHS, NUTRIENTS} from '../../config/Constants';
+import SearchResult from '../searchResult/SearchResult'
 
 export default class Home extends React.Component {
 
@@ -95,8 +95,7 @@ export default class Home extends React.Component {
 						</div>
 					</div>
 				</form>	
-				<div className="searchResult">
-				</div>
+				<SearchResult/>
 			</div>
 		);
 	}
