@@ -1,3 +1,21 @@
+.recipe-finder-panel{
+	width: 800px;
+	height: auto;	
+}
+
+h3.retroshadow {
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	font-size: 72px;
+	padding: 80px 50px;
+	text-align: center;
+	text-transform: uppercase;
+	text-rendering: optimizeLegibility;
+	color: #2c2c2c;
+	background-color: #d5d5d5;
+	letter-spacing: .05em;
+	text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
+  }
+
 .receipe-finder-card-square > .mdl-card__title > .mdl-card__title-text {
 	margin-right: 16px;
 }		

@@ -11,6 +11,11 @@ class RecipeSearchStore extends EventEmitter {
 		this.fromIdx = 0;
 		this.toIdx = PER_PAGE_LIMIT;
 		this.queryText = '';
+		this.diet = '';
+		this.health = '';
+		this.lowCalories = undefined;
+		this.highCalories = undefined;
+		this.nutrients = undefined;
 		//Registers action handler with the Dispatcher.
 		Dispatcher.register(this._registerToActions.bind(this));
 	}
@@ -39,7 +44,12 @@ class RecipeSearchStore extends EventEmitter {
 			queryText: this.queryText, 
 			from: this.fromIdx,  
 			to: this.toIdx, 
-			more : this.more
+			more : this.more,
+			diet: this.diet,
+			lowCalories: this.lowCalories,
+			highCalories: this.highCalories,
+			health: this.health,
+			nutrients: this.nutrients
 		}
 	}
 

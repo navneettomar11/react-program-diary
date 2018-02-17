@@ -11,7 +11,54 @@ class RecipeSearchAction {
 
 	
 	callRecipeSearchApi(searchObj){
-		let searchData = {'q':searchObj.queryText, app_id : EDAMAM_API_ID, app_key : EDAMAM_API_KEY, from: searchObj.from, to: searchObj.to};
+		let lowCalories = undefined;
+		let highCalories = undefined;
+		let minNutrient = undefined;
+		let maxNutirent = undefined;
+		let searchData = {
+			'q':searchObj.ingredient, 
+			app_id : EDAMAM_API_ID, 
+			app_key : EDAMAM_API_KEY
+		};
+		searchData.from = searchObj.from  || 0;
+		searchData.to = searchObj.to || PER_PAGE_LIMIT;
+		//diet
+		if(searchObj.diet){
+			searchData.diet = searchObj.diet;
+		}
+		//health
+		if(searchObj.health){
+			searchData.health = searchObj.health;
+		}
+		//calories
+		if(searchObj.lowCalories && parseInt(searchObj.lowCalories,10) !== 0){
+			lowCalories=window.encodeURIComponent(`lte ${parseInt(searchObj.lowCalories,10)}`);
+		}
+		if(searchObj.highCalories && parseInt(searchObj.highCalories,10) !== 0){
+			highCalories=window.encodeURIComponent(`gte ${parseInt(searchObj.highCalories,10)}`);
+		}
+		if(lowCalories && highCalories){
+			searchData.calories = `${lowCalories},${highCalories}`;
+		}else if(highCalories || lowCalories){
+			searchData.calories = lowCalories || highCalories;
+		}
+		//Nutrient
+		if(searchObj.minNutrient && parseInt(searchObj.minNutrient, 10) !== 0){
+			minNutrient = parseInt(searchObj.minNutrient,10);
+		}
+		if(searchObj.maxNutrient && parseInt(searchObj.maxNutrient, 10) !== 0){
+			maxNutirent = parseInt(searchObj.maxNutrient,10);
+		}
+		let objName = searchObj.nutrientCode;
+		if(minNutrient && maxNutirent){
+			searchData.nutrients = {};
+			searchData.nutrients[searchObj.nutrientCode] = `${minNutrient}-${maxNutirent}`;
+		}else if(minNutrient || maxNutirent){
+			searchData.nutrients = {};
+			searchData.nutrients[searchObj.nutrientCode] = maxNutirent || (minNutrient ? minNutrient+window.encodeURIComponent('+'): undefined);
+		}
+
+		//Call Edaman Recipe Api
 		this._callEdamanRecipeSearchApi(searchData, ACTIONTYPES.SEARCH_RECIPE);
 	}
 
