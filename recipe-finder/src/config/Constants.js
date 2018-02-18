@@ -7,7 +7,8 @@ export const PER_PAGE_LIMIT = 9;
 
 export const ACTIONTYPES = {
 	SEARCH_RECIPE: 'search-receipes',
-	LOAD_MORE_RECIPES : 'load-more-search-recipes'
+	LOAD_MORE_RECIPES : 'load-more-search-recipes',
+	CLEAR_SEARCH_RECIPE_DATA: 'clearRecipeSearchData'
 };
 
 export const DIETS = [

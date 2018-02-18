@@ -49,7 +49,6 @@ class RecipeSearchAction {
 		if(searchObj.maxNutrient && parseInt(searchObj.maxNutrient, 10) !== 0){
 			maxNutirent = parseInt(searchObj.maxNutrient,10);
 		}
-		let objName = searchObj.nutrientCode;
 		if(minNutrient && maxNutirent){
 			searchData.nutrients = {};
 			searchData.nutrients[searchObj.nutrientCode] = `${minNutrient}-${maxNutirent}`;
@@ -67,6 +66,13 @@ class RecipeSearchAction {
 		let toIdx = fromIdx + PER_PAGE_LIMIT;
 		let searchData = {'q':searchObj.queryText, app_id : EDAMAM_API_ID, app_key : EDAMAM_API_KEY, from: fromIdx, to: toIdx};
 		this._callEdamanRecipeSearchApi(searchData, ACTIONTYPES.SEARCH_RECIPE);
+	}
+
+	clearData(){
+		Dispatcher.dispatch({
+			actionType: ACTIONTYPES.CLEAR_SEARCH_RECIPE_DATA,
+			payload: {}, 
+		});
 	}
 
 	_callEdamanRecipeSearchApi(searchData, dispatchActionType){

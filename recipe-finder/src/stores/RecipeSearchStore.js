@@ -30,6 +30,9 @@ class RecipeSearchStore extends EventEmitter {
 			case ACTIONTYPES.LOAD_MORE_RECIPES:
 				this._callRecipeSearchApi(action.payload);
 				break;
+			case ACTIONTYPES.CLEAR_SEARCH_RECIPE_DATA:
+				this._clearRecipeSearch(action.payload);	
+				break;
 			default:
 				console.log('No action');
 				break;
@@ -91,6 +94,20 @@ class RecipeSearchStore extends EventEmitter {
 		this.fromIdx = data.from;
 		this.toIdx = data.to;
 		this.queryText = data.queryText;
+		this.emit(CHANGE_EVENT);
+	}
+
+	_clearRecipeSearch(){
+		this.recipeList = [];
+		this.more = false;
+		this.fromIdx = 0;
+		this.toIdx = PER_PAGE_LIMIT;
+		this.queryText = '';
+		this.diet = '';
+		this.health = '';
+		this.lowCalories = undefined;
+		this.highCalories = undefined;
+		this.nutrients = undefined;	
 		this.emit(CHANGE_EVENT);
 	}
 

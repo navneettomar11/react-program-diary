@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Image extends React.Component{
+export default class Image extends React.Component{
 
 	constructor(props){
 		super(props);
