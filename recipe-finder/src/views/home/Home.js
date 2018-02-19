@@ -2,7 +2,8 @@ import React from 'react';
 import RecipeSearchAction from '../../actions/RecipeSearchAction';
 import RecipeSearchStore from '../../stores/RecipeSearchStore';
 import {DIETS, HEALTHS, NUTRIENTS, PER_PAGE_LIMIT} from '../../config/Constants';
-import SearchResult from '../searchResult/SearchResult'
+import SearchResult from '../searchResult/SearchResult';
+import {Spinner} from '../../commons';
 
 export default class Home extends React.Component {
 
@@ -20,7 +21,8 @@ export default class Home extends React.Component {
 			from: 0,
 			to: PER_PAGE_LIMIT,
 			more: false,
-			error: ''
+			error: '',
+			loading: false
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.callSearchRecipeApi = this.callSearchRecipeApi.bind(this);
@@ -30,7 +32,7 @@ export default class Home extends React.Component {
 	}
 
 	_onChange(){
-		this.setState({ more :  RecipeSearchStore.isMore()});
+		this.setState({ more :  RecipeSearchStore.isMore(), loading: false});
 	}
 
 	componentWillMount(){
@@ -39,6 +41,8 @@ export default class Home extends React.Component {
 
 	componentWillUnmount(){
 		RecipeSearchStore.removeChangeListener(this._onChange);
+		RecipeSearchAction.clearData();
+		
 	}
 
 	handleInputChange(event){
@@ -60,13 +64,19 @@ export default class Home extends React.Component {
 
 	callSearchRecipeApi(event){
 		if(this.validate()){
-			RecipeSearchAction.callRecipeSearchApi(this.state);
+			this.setState({loading: true},()=>{
+				RecipeSearchAction.callRecipeSearchApi(this.state);
+			});
 		}
 		event.preventDefault();
 	}
 
 	loadMoreRecipes(){
-
+		let fromIdx = this.state.to;
+		let toIdx = fromIdx + PER_PAGE_LIMIT;
+		this.setState({from: fromIdx, to:toIdx, loading: true},()=>{
+			RecipeSearchAction.callRecipeSearchApi(this.state);
+		});
 	}
 
 	clearSearchForm(event){
@@ -82,10 +92,9 @@ export default class Home extends React.Component {
 			from: 0,
 			to: PER_PAGE_LIMIT,
 			more: false,
-			error: ''
+			error: '',
+			loading: false
 		},()=> RecipeSearchAction.clearData());
-		event.preventDefault();
-		
 	}
 
 	hasError(){
@@ -140,6 +149,7 @@ export default class Home extends React.Component {
 						</div>	
 					</div>)
 				}
+				<Spinner loading={this.state.loading}/>
 			</div>
 		);
 	}

@@ -9,7 +9,6 @@ class RecipeSearchAction {
 		this.httpClient = new HttpClient();
 	}
 
-	
 	callRecipeSearchApi(searchObj){
 		let lowCalories = undefined;
 		let highCalories = undefined;
@@ -62,10 +61,7 @@ class RecipeSearchAction {
 	}
 
 	loadMoreReceipes(searchObj){
-		let fromIdx = searchObj.to;
-		let toIdx = fromIdx + PER_PAGE_LIMIT;
-		let searchData = {'q':searchObj.queryText, app_id : EDAMAM_API_ID, app_key : EDAMAM_API_KEY, from: fromIdx, to: toIdx};
-		this._callEdamanRecipeSearchApi(searchData, ACTIONTYPES.SEARCH_RECIPE);
+		this.callRecipeSearchApi(searchObj);
 	}
 
 	clearData(){
