@@ -33,6 +33,9 @@ class RecipeSearchStore extends EventEmitter {
 			case ACTIONTYPES.CLEAR_SEARCH_RECIPE_DATA:
 				this._clearRecipeSearch(action.payload);	
 				break;
+			case ACTIONTYPES.ERROR_SEARCH_RECIPE_DATA:
+				this.__errorInRecipeSearch(action.payload);	
+				break;
 			default:
 				console.log('No action');
 				break;
@@ -108,6 +111,11 @@ class RecipeSearchStore extends EventEmitter {
 		this.lowCalories = undefined;
 		this.highCalories = undefined;
 		this.nutrients = undefined;	
+		this.emit(CHANGE_EVENT);
+	}
+
+	__errorInRecipeSearch(){
+		this.recipeList = [];
 		this.emit(CHANGE_EVENT);
 	}
 

@@ -81,7 +81,10 @@ class RecipeSearchAction {
 				payload: {recipeList: edamanObj.hits || [] , moreData: edamanObj.more, from : edamanObj.from, to : edamanObj.to, queryText: edamanObj.q}, 
 			});
 		}).catch(function(ex) {
-			console.log(ex);
+			Dispatcher.dispatch({
+				actionType: ACTIONTYPES.ERROR_SEARCH_RECIPE_DATA,
+				payload: {recipeList: []}, 
+			});
 		});
 	}
 }

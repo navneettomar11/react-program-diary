@@ -63,6 +63,7 @@ export default class Home extends React.Component {
 	}
 
 	callSearchRecipeApi(event){
+		RecipeSearchAction.clearData();
 		if(this.validate()){
 			this.setState({loading: true},()=>{
 				RecipeSearchAction.callRecipeSearchApi(this.state);

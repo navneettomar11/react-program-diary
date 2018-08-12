@@ -4,11 +4,14 @@ export const EDAMAM_API_KEY = '918ae0475650ba249a8c7322b5556d2e'
 export const CHANGE_EVENT = 'change';
 export const PER_PAGE_LIMIT = 9;
 
+export const YOUTUBE_API_KEY = 'AIzaSyCSOwvbrz4XPss1VXHom4cU_ULVGTu1zz4';
+
 
 export const ACTIONTYPES = {
 	SEARCH_RECIPE: 'search-receipes',
 	LOAD_MORE_RECIPES : 'load-more-search-recipes',
-	CLEAR_SEARCH_RECIPE_DATA: 'clearRecipeSearchData'
+	CLEAR_SEARCH_RECIPE_DATA: 'clearRecipeSearchData',
+	ERROR_SEARCH_RECIPE_DATA: 'errorRecipeSearchData',
 };
 
 export const DIETS = [
