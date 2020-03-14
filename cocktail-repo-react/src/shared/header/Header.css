@@ -1,0 +1,10 @@
+.branding { 
+    color: #fff;
+}
+
+.header > .branding > .nav-link {
+    color: blanchedalmond;
+}
+.header > .branding > .nav-link > .title {
+    margin-left: .5rem;
+}

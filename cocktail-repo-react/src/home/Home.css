@@ -1,0 +1,32 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+.search-container > .card {
+   width: 50%;     
+    box-shadow: none;
+    border: none;
+}
+
+.search-container .clr-form-control, .search-container .clr-control-container, 
+.search-container .clr-input-wrapper{
+    width: 100%;
+    display: block;
+}
+
+.search-container .clr-input {
+    width: 100%;
+    border-left:  0.02rem  solid lightgrey;
+    border-top:  0.02rem  solid lightgrey;
+    border-right:  0.02rem solid lightgrey;
+    padding: 0.4rem;
+    height: 1.5rem;
+    max-height: 1.5rem;
+    border-radius: 0.2rem;
+}
+
